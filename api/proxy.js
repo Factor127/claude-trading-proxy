@@ -12,7 +12,7 @@ export default async function handler(req, res) {
 
   // Handle GET requests
   if (req.method === 'GET') {
-    res.status(200).json({ message: 'Proxy is working! Use POST for API calls.' });
+    res.status(200).json({ message: 'Trading Proxy v1.1 - Ready for both V1 and V2!' });
     return;
   }
 
@@ -25,7 +25,7 @@ export default async function handler(req, res) {
   try {
     const { type, apiKey, prompt, url } = req.body || {};
 
-    // Handle Claude API calls
+    // Handle Claude API calls (for both V1 and V2)
     if (type === 'claude') {
       if (!apiKey || !prompt) {
         res.status(400).json({ error: 'Missing apiKey or prompt' });
@@ -59,7 +59,7 @@ export default async function handler(req, res) {
       return;
     }
 
-    // Handle stock data API calls
+    // Handle stock data API calls (for both V1 and V2)
     if (type === 'stock' && url) {
       const response = await fetch(url);
       const data = await response.json();
